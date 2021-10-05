@@ -1,6 +1,7 @@
 package sorting;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 import utils.ArrayUtils;
 
@@ -10,10 +11,27 @@ public class SortingWithNullElement {
 
 		String[] sequences = { "b", null, "a", "C", null, null, "c", "A" };
 		
-		String[] result = sortNull(sequences);
+		//
+//		String[] result = sortNull(sequences);
+//		ArrayUtils.print(result);
 		
-		ArrayUtils.print(result);
+		// hadle comparators
+		Arrays.sort(sequences, new Comparator<String>() {
 
+			@Override
+			public int compare(String o1, String o2) {
+				if(o1 == null) {
+					return -1;
+				}
+				if(o2 == null) {
+					return 1;
+				}
+				
+				// ascending
+				return o1.compareToIgnoreCase(o2);
+			}
+		});
+		ArrayUtils.print(sequences);
 	}
 	
 	private static String[] sortNull(String[] sequences) {
